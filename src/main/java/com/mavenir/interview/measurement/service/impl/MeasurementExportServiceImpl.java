@@ -49,7 +49,5 @@ public class MeasurementExportServiceImpl implements MeasurementExportService {
             throw new IllegalArgumentException("Error in CSV Parsing: ", x);
         }
 
-        // TODO Create CSV files based on requirements  -> DONE
-
     }
 }
