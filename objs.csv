@@ -1,0 +1,5 @@
+appName,classId,increment,initialValue,instanceId,interval,measurementId
+Skynet,responder,5,0,responder-00,3600,perf.int001
+MCO,responder,1,10,responder-00,60,perf.int000
+Skynet,responder,-1,20,responder-00,60,perf.int003
+XMS,responder,10,5,responder-00,1800,perf.int002

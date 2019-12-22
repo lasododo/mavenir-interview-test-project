@@ -1,0 +1,38 @@
+[
+  {
+    "appName": "MCO",
+    "measurementId": "perf.int000",
+    "classId": "responder",
+    "instanceId": "responder-00",
+    "initialValue": 10,
+    "increment": 1,
+    "interval": 60
+  },
+  {
+    "appName": "Skynet",
+    "measurementId": "perf.int001",
+    "classId": "responder",
+    "instanceId": "responder-00",
+    "initialValue": 0,
+    "increment": 5,
+    "interval": 3600
+  },
+  {
+    "appName": "XMS",
+    "measurementId": "perf.int002",
+    "classId": "responder",
+    "instanceId": "responder-00",
+    "initialValue": 5,
+    "increment": 10,
+    "interval": 1800
+  },
+  {
+    "appName": "Skynet",
+    "measurementId": "perf.int003",
+    "classId": "responder",
+    "instanceId": "responder-00",
+    "initialValue": 20,
+    "increment": -1,
+    "interval": 60
+  }
+]

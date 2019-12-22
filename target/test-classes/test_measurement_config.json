@@ -1,0 +1,11 @@
+[
+  {
+    "appName": "TEST_APP",
+    "measurementId": "perf.int000",
+    "classId": "responder",
+    "instanceId": "responder-00",
+    "initialValue": 10,
+    "increment": 1,
+    "interval": 60
+  }
+]
