@@ -23,7 +23,7 @@ public class MeasurementDefinionDto {
 
     public MeasurementDefinionDto(String name, String measID, String clsID, String instID,
                                   int init, int increment, int interval) {
-        if (nullChecker(name, measID, clsID, instID)){
+        if (nullChecker(name, measID, clsID, instID)) {
             throw new IllegalArgumentException("one of the string arguments is null ");
         }
         // can be replaced with setters
@@ -40,7 +40,7 @@ public class MeasurementDefinionDto {
         return str == null;
     }
 
-    private boolean nullChecker(String name, String measID, String clsID, String instID){
+    private boolean nullChecker(String name, String measID, String clsID, String instID) {
         return nullCheck(name) || nullCheck(measID) || nullCheck(clsID) || nullCheck(instID);
     }
 
@@ -95,7 +95,7 @@ public class MeasurementDefinionDto {
     @Override
     public String toString() {
 
-        return  "App name:" + getAppName() +
+        return  "App name: " + getAppName() + // could have used this.appName, but its the same
                 " , Measurement ID: " + getMeasurementId() +
                 " , Class ID: " + getClassId() +
                 " , Instance ID: " + getInstanceId() +

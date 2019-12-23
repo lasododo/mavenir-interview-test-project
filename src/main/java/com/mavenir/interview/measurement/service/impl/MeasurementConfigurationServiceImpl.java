@@ -32,15 +32,15 @@ public class MeasurementConfigurationServiceImpl implements MeasurementConfigura
     public List<MeasurementDefinionDto> getMeasurementDefinitions(List<String> selectedMeasurements) {
         final List<MeasurementDefinionDto> measurementDefinitions =
                 measurementConfigurationDao.getMeasurementDefinitions();
-        // TODO Provide filtered list of measurements  -> DONE
+        // set of filtered objects
         Set<MeasurementDefinionDto> streamSet = new HashSet<>();
+
         for(String str: selectedMeasurements){
+            String editedStr = " " + str + " ";
             List<MeasurementDefinionDto> list = new ArrayList<>(measurementDefinitions);
-            streamSet.addAll(list.stream().filter((n -> (n.toString().contains(str)))).collect(Collectors.toList()));
+            streamSet.addAll(list.stream().filter((n -> (n.toString().contains(editedStr)))).collect(Collectors.toList()));
         }
-        for(MeasurementDefinionDto obj : streamSet){
-            System.out.println(obj.getAppName());
-        }
+
         return new ArrayList<>(streamSet);
     }
 }

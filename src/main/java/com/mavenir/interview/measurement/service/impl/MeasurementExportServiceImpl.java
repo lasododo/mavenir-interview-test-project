@@ -36,14 +36,18 @@ public class MeasurementExportServiceImpl implements MeasurementExportService {
         this.measurementConfigurationService = measurementConfigurationService;
     }
 
+    public String getOUTPUT_FILE() {
+        return OUTPUT_FILE;
+    }
+
     @Override
     public void exportMeasurements(File outputFolder, List<String> selectedMeasurements) {
         final List<MeasurementDefinionDto> measurementDefinitions =
                 measurementConfigurationService.getMeasurementDefinitions(selectedMeasurements);
+
         try (Writer writer = Files.newBufferedWriter(Paths.get(outputFolder.toString(), this.OUTPUT_FILE))) {
             StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer)
-                    .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
-                    .build();
+                    .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER).build();
             beanToCsv.write(measurementDefinitions);
         } catch (IOException | CsvDataTypeMismatchException | CsvRequiredFieldEmptyException x) {
             throw new IllegalArgumentException("Error in CSV Parsing: ", x);
