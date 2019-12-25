@@ -17,7 +17,6 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import com.mavenir.interview.measurement.api.dto.MeasurementDefinionDto;
-import com.mavenir.interview.measurement.dao.MeasurementConfigurationDao;
 import com.mavenir.interview.measurement.dao.impl.MeasurementConfigurationDaoImpl;
 import com.mavenir.interview.measurement.service.MeasurementConfigurationService;
 
@@ -27,32 +26,21 @@ import com.mavenir.interview.measurement.service.MeasurementConfigurationService
 public class MeasurementConfigurationServiceImplTest {
 
     private MeasurementConfigurationService measurementConfigurationService;
-    private MeasurementConfigurationDao measurementConfigurationDao;
-    private List<MeasurementDefinionDto> allMD;
     private MeasurementConfigurationDaoImpl impl;
 
 
     @Before
     public void setUp() {
-
-        // TODO The DAO can be mocked or use different implementation
-        measurementConfigurationDao = new MeasurementConfigurationDaoImpl();
-
-        measurementConfigurationService = new MeasurementConfigurationServiceImpl();
-        measurementConfigurationService.setMeasurementConfigurationDao(measurementConfigurationDao);
-
-        this.allMD = measurementConfigurationDao.getMeasurementDefinitions();
+        this.measurementConfigurationService = new MeasurementConfigurationServiceImpl();
+        this.measurementConfigurationService.setMeasurementConfigurationDao(new MeasurementConfigurationDaoImpl());
         this.impl = new MeasurementConfigurationDaoImpl();
     }
 
     @Test
     public void testConfigurationService() {
-
-        // TODO Test getMeasurementDefinitions method
         final List<MeasurementDefinionDto> filteredMeasurementDefinitions =
-                measurementConfigurationService.getMeasurementDefinitions(new ArrayList<>());
+                this.measurementConfigurationService.getMeasurementDefinitions(new ArrayList<>());
 
-        // TODO Use assertions if possible, e.g.
         assertThat("Result", filteredMeasurementDefinitions, notNullValue());
     }
 
@@ -60,23 +48,23 @@ public class MeasurementConfigurationServiceImplTest {
     public void testFilteringIDs() {
         String filepath = "src/test/resources/test_measurement_config.json";
         this.impl.setFilepath(filepath);
-        measurementConfigurationService.setMeasurementConfigurationDao(this.impl);
+        this.measurementConfigurationService.setMeasurementConfigurationDao(this.impl);
 
         List<String> lst = new ArrayList<>();
         lst.add("TEST_APP");
-        List<MeasurementDefinionDto> ret = measurementConfigurationService.getMeasurementDefinitions(lst);
+        List<MeasurementDefinionDto> ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
         Assert.assertEquals(1, ret.size());
         lst.clear();
         lst.add("perf.int000");
-        ret = measurementConfigurationService.getMeasurementDefinitions(lst);
+        ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
         Assert.assertEquals(1, ret.size());
         lst.clear();
         lst.add("responder");
-        ret = measurementConfigurationService.getMeasurementDefinitions(lst);
+        ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
         Assert.assertEquals(1, ret.size());
         lst.clear();
         lst.add("responder-00");
-        ret = measurementConfigurationService.getMeasurementDefinitions(lst);
+        ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
         Assert.assertEquals(1, ret.size());
         lst.clear();
 
@@ -86,25 +74,25 @@ public class MeasurementConfigurationServiceImplTest {
     public void multipleFiltersCheck() {
         String filepath = "src/test/resources/test_measurement_config.json";
         this.impl.setFilepath(filepath);
-        measurementConfigurationService.setMeasurementConfigurationDao(this.impl);
+        this.measurementConfigurationService.setMeasurementConfigurationDao(this.impl);
         List<MeasurementDefinionDto> ret;
 
         List<String> lst = new ArrayList<>();
         lst.add("perf.int000");
         lst.add("responder");
-        ret = measurementConfigurationService.getMeasurementDefinitions(lst);
+        ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
         Assert.assertEquals(1, ret.size());
         lst.clear();
         lst.add("perf.int000");
         lst.add("responder");
         lst.add("what have you broke ?");
-        ret = measurementConfigurationService.getMeasurementDefinitions(lst);
+        ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
         Assert.assertEquals(1, ret.size());
         lst.clear();
         lst.add("resp");
         lst.add("rapp");
         lst.add("wot");
-        ret = measurementConfigurationService.getMeasurementDefinitions(lst);
+        ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
         Assert.assertEquals(0, ret.size());
         lst.clear();
     }
@@ -113,20 +101,20 @@ public class MeasurementConfigurationServiceImplTest {
     public void testNoEquals() {
         String filepath = "src/test/resources/test_measurement_config.json";
         this.impl.setFilepath(filepath);
-        measurementConfigurationService.setMeasurementConfigurationDao(this.impl);
+        this.measurementConfigurationService.setMeasurementConfigurationDao(this.impl);
         List<MeasurementDefinionDto> ret;
         List<String> lst = new ArrayList<>();
 
         lst.add("random");
-        ret = measurementConfigurationService.getMeasurementDefinitions(lst);
+        ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
         Assert.assertEquals(0, ret.size());
         lst.clear();
         lst.add("should not work at all");
-        ret = measurementConfigurationService.getMeasurementDefinitions(lst);
+        ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
         Assert.assertEquals(0, ret.size());
         lst.clear();
         lst.add("what have you broke ?");
-        ret = measurementConfigurationService.getMeasurementDefinitions(lst);
+        ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
         Assert.assertEquals(0, ret.size());
         lst.clear();
     }

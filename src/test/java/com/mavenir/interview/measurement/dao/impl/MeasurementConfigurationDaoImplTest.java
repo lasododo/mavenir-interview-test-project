@@ -33,8 +33,6 @@ public class MeasurementConfigurationDaoImplTest {
 
     @Before
     public void setUp() {
-
-        // TODO Init the tested service
         this.measurementConfigurationDao = new MeasurementConfigurationDaoImpl();
         this.allMD = measurementConfigurationDao.getMeasurementDefinitions();
         this.impl = new MeasurementConfigurationDaoImpl();
@@ -42,11 +40,9 @@ public class MeasurementConfigurationDaoImplTest {
 
     @Test
     public void testConfigurationDao() {
-
         final List<MeasurementDefinionDto> allMeasurementDefinitions =
                 measurementConfigurationDao.getMeasurementDefinitions();
 
-        // TODO Use assertions if possible, e.g.
         assertThat("Result", allMeasurementDefinitions, notNullValue());
     }
 

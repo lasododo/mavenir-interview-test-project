@@ -15,7 +15,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.mavenir.interview.measurement.dao.MeasurementConfigurationDao;
 import com.mavenir.interview.measurement.dao.impl.MeasurementConfigurationDaoImpl;
 import com.mavenir.interview.measurement.service.MeasurementConfigurationService;
 
@@ -24,8 +23,6 @@ import com.mavenir.interview.measurement.service.MeasurementConfigurationService
  */
 public class MeasurementExportServiceImplTest {
 
-    private MeasurementConfigurationDao measurementConfigurationDao;
-    private MeasurementConfigurationService measurementConfigurationService;
     private MeasurementExportServiceImpl measurementExportService;
     private String folderPath = "src/test/resources/export";
 
@@ -68,16 +65,10 @@ public class MeasurementExportServiceImplTest {
 
     @Before
     public void setUp() {
-
-        // TODO The DAO can be mocked or use different implementation
-        measurementConfigurationDao = new MeasurementConfigurationDaoImpl();
-
-        // TODO The service can be mocked or use different implementation
-        measurementConfigurationService = new MeasurementConfigurationServiceImpl();
-        measurementConfigurationService.setMeasurementConfigurationDao(measurementConfigurationDao);
-
-        measurementExportService = new MeasurementExportServiceImpl();
-        measurementExportService.setMeasurementConfigurationService(measurementConfigurationService);
+        MeasurementConfigurationService measurementConfigurationService = new MeasurementConfigurationServiceImpl();
+        measurementConfigurationService.setMeasurementConfigurationDao(new MeasurementConfigurationDaoImpl());
+        this.measurementExportService = new MeasurementExportServiceImpl();
+        this.measurementExportService.setMeasurementConfigurationService(measurementConfigurationService);
     }
 
     @Test
@@ -91,29 +82,30 @@ public class MeasurementExportServiceImplTest {
     public void testExportService1() {
         List<String> lst = new ArrayList<>();
         lst.add("perf.int000");
-        measurementExportService.exportMeasurements(new File(this.folderPath), lst);
-        reader1(new File(String.valueOf(Paths.get(folderPath, measurementExportService.getOUTPUT_FILE()))));
+        this.measurementExportService.exportMeasurements(new File(this.folderPath), lst);
+        reader1(new File(String.valueOf(Paths.get(this.folderPath, this.measurementExportService.getOUTPUT_FILE()))));
     }
 
     @Test
     public void testExportService2() {
         List<String> lst = new ArrayList<>();
         lst.add("perf.int000");
-        measurementExportService.exportMeasurements(new File(this.folderPath), lst);
-        firstLineChecker(new File(String.valueOf(Paths.get(folderPath, measurementExportService.getOUTPUT_FILE()))));
+        this.measurementExportService.exportMeasurements(new File(this.folderPath), lst);
+        firstLineChecker(new File(String.valueOf(
+                Paths.get(this.folderPath, this.measurementExportService.getOUTPUT_FILE()))));
     }
 
     @Test
     public void testEmptyExportService1() {
-        measurementExportService.exportMeasurements(new File(this.folderPath), new ArrayList<>());
-        reader2(new File(String.valueOf(Paths.get(folderPath, measurementExportService.getOUTPUT_FILE()))));
+        this.measurementExportService.exportMeasurements(new File(this.folderPath), new ArrayList<>());
+        reader2(new File(String.valueOf(Paths.get(this.folderPath, this.measurementExportService.getOUTPUT_FILE()))));
     }
 
     @Test
     public void testEmptyExportService2() {
         List<String> lst = new ArrayList<>();
         lst.add("whatever thingy");
-        measurementExportService.exportMeasurements(new File(this.folderPath), lst);
-        reader2(new File(String.valueOf(Paths.get(folderPath, measurementExportService.getOUTPUT_FILE()))));
+        this.measurementExportService.exportMeasurements(new File(this.folderPath), lst);
+        reader2(new File(String.valueOf(Paths.get(this.folderPath, this.measurementExportService.getOUTPUT_FILE()))));
     }
 }

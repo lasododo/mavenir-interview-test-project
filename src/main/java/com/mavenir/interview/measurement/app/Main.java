@@ -79,22 +79,9 @@ public class Main {
         if (args.length != 2){
             throw new IllegalArgumentException("not enough arguments");
         }
-        // TODO Run the application with 2 parameters -
-        //  output folder and comma-separated list of selected measurements   => DONE
 
         final Main app = new Main();
-
-        // TODO Read folder name from command line as first parameter    => DONE
-
-        // final File outputFolder = new File(".");
         final File outputFolder = new File(args[0]);
-
-        // TODO Read and parse selected measurements from command line as second parameter
-        //  (comma-separated list).    => DONE
-
-        // final List<String> selectedMeasurements = Arrays.asList(
-        //        // "perf.int000", "perf.int001", "perf.int002", "perf.int003");
-
         final List<String> selectedMeasurements = Arrays.asList(args[1].split(","));
 
         app.exportMeasurements(outputFolder, selectedMeasurements);
