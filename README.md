@@ -21,10 +21,10 @@ Use any Java libraries as dependencies you like:
 - Date format will be dd-MM-yyyy HH:mm:ss.
 - Output of CSV file will look like this:
 
-"01-02-2018 10:12:45",15,"Skynet","perf.int001"
-"01-02-2018 10:12:55",20,"Skynet","perf.int001"
-"01-02-2018 10:13:05",25,"Skynet","perf.int001"
-"01-02-2018 10:13:15",30,"Skynet","perf.int001"
+- > "01-02-2018 10:12:45",15,"Skynet","perf.int001"
+- > "01-02-2018 10:12:55",20,"Skynet","perf.int001"
+- > "01-02-2018 10:13:05",25,"Skynet","perf.int001"
+- > "01-02-2018 10:13:15",30,"Skynet","perf.int001"
 
 Hints:
 1. Use any Java IDE (IntelliJ, Eclipse, NetBeans, ...) you like and import the source code as the 'Apache Maven' project to the IDE.
