@@ -29,7 +29,7 @@ import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 public class MeasurementExportServiceImpl implements MeasurementExportService {
 
     private MeasurementConfigurationService measurementConfigurationService;
-    private final String OUTPUT_FILE = "objs.csv";
+    private String OUTPUT_FILE = "objs.csv";
 
     @Override
     public void setMeasurementConfigurationService(MeasurementConfigurationService measurementConfigurationService) {
