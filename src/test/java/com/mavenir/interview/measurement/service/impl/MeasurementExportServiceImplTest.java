@@ -30,7 +30,7 @@ public class MeasurementExportServiceImplTest {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)))){
             String line = reader.readLine();
             line = reader.readLine();
-            while (line != null) {
+            if (line != null) {
                 Assert.assertTrue(line.contains("perf.int000"));
                 return;
             }
@@ -43,7 +43,7 @@ public class MeasurementExportServiceImplTest {
     private void firstLineChecker(File f) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)))){
             String line = reader.readLine();
-            while (line != null) {
+            if (line != null) {
                 Assert.assertEquals(line,
                         "appName,classId,increment,initialValue,instanceId,interval,measurementId");
                 return;
@@ -73,8 +73,6 @@ public class MeasurementExportServiceImplTest {
 
     @Test
     public void testExportService() {
-
-        // TODO Test exportMeasurements method
         measurementExportService.exportMeasurements(new File("."), new ArrayList<>());
     }
 
@@ -83,7 +81,11 @@ public class MeasurementExportServiceImplTest {
         List<String> lst = new ArrayList<>();
         lst.add("perf.int000");
         this.measurementExportService.exportMeasurements(new File(this.folderPath), lst);
-        reader1(new File(String.valueOf(Paths.get(this.folderPath, this.measurementExportService.getOUTPUT_FILE()))));
+        File f = new File(String.valueOf(Paths.get(this.folderPath, this.measurementExportService.getOUTPUT_FILE())));
+        reader1(f);
+        if(!f.delete()){
+            Assert.fail();
+        }
     }
 
     @Test
@@ -91,14 +93,21 @@ public class MeasurementExportServiceImplTest {
         List<String> lst = new ArrayList<>();
         lst.add("perf.int000");
         this.measurementExportService.exportMeasurements(new File(this.folderPath), lst);
-        firstLineChecker(new File(String.valueOf(
-                Paths.get(this.folderPath, this.measurementExportService.getOUTPUT_FILE()))));
+        File f = new File(String.valueOf(Paths.get(this.folderPath, this.measurementExportService.getOUTPUT_FILE())));
+        firstLineChecker(f);
+        if(!f.delete()){
+            Assert.fail();
+        }
     }
 
     @Test
     public void testEmptyExportService1() {
         this.measurementExportService.exportMeasurements(new File(this.folderPath), new ArrayList<>());
-        reader2(new File(String.valueOf(Paths.get(this.folderPath, this.measurementExportService.getOUTPUT_FILE()))));
+        File f = new File(String.valueOf(Paths.get(this.folderPath, this.measurementExportService.getOUTPUT_FILE())));
+        reader2(f);
+        if(!f.delete()){
+            Assert.fail();
+        }
     }
 
     @Test
@@ -106,6 +115,10 @@ public class MeasurementExportServiceImplTest {
         List<String> lst = new ArrayList<>();
         lst.add("whatever thingy");
         this.measurementExportService.exportMeasurements(new File(this.folderPath), lst);
-        reader2(new File(String.valueOf(Paths.get(this.folderPath, this.measurementExportService.getOUTPUT_FILE()))));
+        File f = new File(String.valueOf(Paths.get(this.folderPath, this.measurementExportService.getOUTPUT_FILE())));
+        reader2(f);
+        if(!f.delete()){
+            Assert.fail();
+        }
     }
 }
