@@ -18,7 +18,6 @@ import org.junit.Test;
 import com.mavenir.interview.measurement.dao.MeasurementConfigurationDao;
 import com.mavenir.interview.measurement.dao.impl.MeasurementConfigurationDaoImpl;
 import com.mavenir.interview.measurement.service.MeasurementConfigurationService;
-import com.mavenir.interview.measurement.service.MeasurementExportService;
 
 /**
  * Test of {@code MeasurementExportServiceImpl} class.

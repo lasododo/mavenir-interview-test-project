@@ -26,6 +26,32 @@ public class Main {
     private MeasurementConfigurationService measurementConfigurationService;
     private MeasurementConfigurationDao measurementConfigurationDao;
 
+    /*
+        Ignore this code -> Work in progress for later
+            ( If you are reading this, I have forgotten to remove it
+                 before evaluation / I am working on it right now )
+
+        --> this code should not work, because of main is static.
+
+        private String path;
+
+        public void setPath(String path) {
+            this.path = path;
+        }
+
+        private void initCustom() {
+            MeasurementConfigurationDaoImpl editedMCDI = new MeasurementConfigurationDaoImpl();
+            MeasurementConfigurationServiceImpl editedMCSI = new MeasurementConfigurationServiceImpl();
+            MeasurementExportServiceImpl editedMESI = new MeasurementExportServiceImpl();
+
+            editedMCDI.setFilepath(this.path);
+            editedMCSI.setMeasurementConfigurationDao(editedMCDI);
+            editedMESI.setMeasurementConfigurationService(editedMCSI);
+
+            this.measurementExportService = editedMESI;
+        }
+    */
+
     private void initServices() {
         // Setup concrete implementations
         measurementConfigurationService = new MeasurementConfigurationServiceImpl();
@@ -35,6 +61,12 @@ public class Main {
         // Inject dependencies
         measurementConfigurationService.setMeasurementConfigurationDao(measurementConfigurationDao);
         measurementExportService.setMeasurementConfigurationService(measurementConfigurationService);
+
+        /*
+            if (this.path != null) {
+                initCustom();
+            }
+        */
     }
 
     public void exportMeasurements(File outputFolder, List<String> selectedMeasurements) {
@@ -42,11 +74,11 @@ public class Main {
         measurementExportService.exportMeasurements(outputFolder, selectedMeasurements);
     }
 
+
     public static void main(String[] args) {
         if (args.length != 2){
             throw new IllegalArgumentException("not enough arguments");
         }
-
         // TODO Run the application with 2 parameters -
         //  output folder and comma-separated list of selected measurements   => DONE
 
@@ -64,6 +96,8 @@ public class Main {
         //        // "perf.int000", "perf.int001", "perf.int002", "perf.int003");
 
         final List<String> selectedMeasurements = Arrays.asList(args[1].split(","));
+
         app.exportMeasurements(outputFolder, selectedMeasurements);
+
     }
 }

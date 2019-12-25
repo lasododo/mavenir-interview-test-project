@@ -1,29 +1,70 @@
 package com.mavenir.interview.measurement.app;
 
-import com.mavenir.interview.measurement.api.dto.MeasurementDefinionDto;
-import com.mavenir.interview.measurement.dao.impl.MeasurementConfigurationDaoImpl;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
-
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
 
 public class MainTest {
 
+    private final String filename = "src/test/resources/export";
 
-    @Before
-    public void setUp() {
+    @Test
+    public void testLessThan2ArgumentIsGiven() {
+        String[] arguments = new String[1];
+        arguments[0] = this.filename;
 
-        // TODO Init the tested service
+        try {
+            Main.main(arguments);
+            Assert.fail();
+        } catch (IllegalArgumentException x){
+            Assert.assertTrue(true);
+        }
     }
 
     @Test
-    public void testConfigurationDao() {
+    public void testMoreThan2ArgumentAreGiven() {
+        String argument =  "perf.int000";
 
-        // TODO Use assertions if possible, e.g.
+        String[] arguments = new String[3];
+        arguments[0] = this.filename;
+        arguments[1] = argument;
 
+        try {
+            Main.main(arguments);
+            Assert.fail();
+        } catch (IllegalArgumentException x){
+            Assert.assertTrue(true);
+        }
+    }
+
+    @Test
+    public void test2GivenArguments() {
+        String argument =  "perf.int000";
+
+        String[] arguments = new String[2];
+        arguments[0] = this.filename;
+        arguments[1] = argument;
+
+        try {
+            Main.main(arguments);
+            Assert.assertTrue(true);
+        } catch (IllegalArgumentException x){
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void testWrongFile() {
+        String argument =  "perf.int000";
+
+        String[] arguments = new String[2];
+        arguments[0] = "random_wtf_file.bla";
+        arguments[1] = argument;
+
+        try {
+            Main.main(arguments);
+            Assert.fail();
+        } catch (IllegalArgumentException x){
+            Assert.assertTrue(true);
+        }
     }
 }

@@ -6,14 +6,9 @@
  */
 package com.mavenir.interview.measurement.service.impl;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
