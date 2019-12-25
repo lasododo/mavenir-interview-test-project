@@ -64,6 +64,10 @@ public class MeasurementDefinionDto {
         return initialValue;
     }
 
+    public void multiplyInit(int value){
+        this.initialValue += value;
+    }
+
     public int getIncrement() {
         return increment;
     }
