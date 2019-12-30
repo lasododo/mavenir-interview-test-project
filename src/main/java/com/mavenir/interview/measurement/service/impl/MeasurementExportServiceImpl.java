@@ -28,6 +28,10 @@ public class MeasurementExportServiceImpl implements MeasurementExportService {
     private MeasurementConfigurationService measurementConfigurationService;
     private int timer = 10000;
 
+    /**
+     * DO NOT USE THIS !!! ITS FOR TEST PURPOSES ONLY!!!
+     * @param timer -> integer that represents time in milliseconds ( 1000 == 1 second )
+     */
     public void setTimer(int timer) {
         this.timer = timer;
     }
@@ -37,6 +41,11 @@ public class MeasurementExportServiceImpl implements MeasurementExportService {
         this.measurementConfigurationService = measurementConfigurationService;
     }
 
+    /**
+     * exports a single measurement.
+     * @param outputFolder -> folder, where to output the CSV
+     * @param msr -> MeasurementDefinionDto object that contains all info thats need to ne written
+     */
     private void cvsWriter(File outputFolder, MeasurementDefinionDto msr){
         try (
                 Writer writer = new FileWriter(
@@ -68,8 +77,6 @@ public class MeasurementExportServiceImpl implements MeasurementExportService {
             return;
         }
 
-        System.out.println(measurementDefinitions);
-
         int loopEnd = 0;
         boolean loopHandler = true;
         while(loopHandler) {
@@ -85,7 +92,7 @@ public class MeasurementExportServiceImpl implements MeasurementExportService {
             long end = System.currentTimeMillis();
             try {
                 if(loopHandler) {
-                    System.out.println(this.timer - (end - start));
+                    // just check -> System.out.println(this.timer - (end - start));
                     Thread.sleep(this.timer - (end - start));
                 }
             } catch (InterruptedException x){

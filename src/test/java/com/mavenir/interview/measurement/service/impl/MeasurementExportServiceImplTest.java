@@ -11,7 +11,6 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.*;
@@ -46,7 +45,7 @@ public class MeasurementExportServiceImplTest {
             int counter = 0;
             String time = null;
             while (line != null) {
-                String args[] = line.split(",");
+                String[] args = line.split(",");
                 Assert.assertEquals(4, args.length);
                 args[0] = args[0].replace("\"", "");
                 args[1] = args[1].replace("\"", "");
@@ -61,13 +60,13 @@ public class MeasurementExportServiceImplTest {
                 }
                 String time2 = args[0].split(" ")[1].split(":")[2];
                 if(time != null){
-                    if ((Integer.valueOf(time) + 1) == 60){
+                    if ((Integer.parseInt(time) + 1) == 60){
                         time = "-1";
                     }
-                    System.out.println(String.valueOf(Integer.valueOf(time) + 1).equals(time2));
+                    System.out.println(String.valueOf(Integer.parseInt(time) + 1).equals(time2));
                     System.out.println(time);
                     System.out.println(time2);
-                    if ((Integer.valueOf(time) + 1) != (Integer.valueOf(time2))){
+                    if ((Integer.parseInt(time) + 1) != (Integer.parseInt(time2))){
                         Assert.fail();
                     }
                 }
@@ -113,6 +112,7 @@ public class MeasurementExportServiceImplTest {
         this.measurementExportService = new MeasurementExportServiceImpl();
         this.measurementExportService.setMeasurementConfigurationService(measurementConfigurationService);
         this.measurementExportService.setTimer(1000); // for test efficiency
+        System.out.println("These tests might take around 30 seconds, so sorry in advance");
     }
 
     public void clear() {

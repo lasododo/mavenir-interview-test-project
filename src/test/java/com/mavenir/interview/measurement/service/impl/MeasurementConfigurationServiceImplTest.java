@@ -53,7 +53,7 @@ public class MeasurementConfigurationServiceImplTest {
         List<String> lst = new ArrayList<>();
         lst.add("TEST_APP");
         List<MeasurementDefinionDto> ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
-        Assert.assertEquals(1, ret.size());
+        Assert.assertEquals(0, ret.size());
         lst.clear();
         lst.add("perf.int000");
         ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
@@ -61,11 +61,11 @@ public class MeasurementConfigurationServiceImplTest {
         lst.clear();
         lst.add("responder");
         ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
-        Assert.assertEquals(1, ret.size());
+        Assert.assertEquals(0, ret.size());
         lst.clear();
         lst.add("responder-00");
         ret = this.measurementConfigurationService.getMeasurementDefinitions(lst);
-        Assert.assertEquals(1, ret.size());
+        Assert.assertEquals(0, ret.size());
         lst.clear();
 
     }

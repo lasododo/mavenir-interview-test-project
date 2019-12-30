@@ -35,10 +35,9 @@ public class MeasurementConfigurationServiceImpl implements MeasurementConfigura
         // set of filtered objects
         Set<MeasurementDefinionDto> streamSet = new HashSet<>();
 
-        for(String str: selectedMeasurements){
-            String editedStr = " " + str + " ";
+        for(String str: selectedMeasurements) {
             List<MeasurementDefinionDto> list = new ArrayList<>(measurementDefinitions);
-            streamSet.addAll(list.stream().filter((n -> (n.toString().contains(editedStr)))).collect(Collectors.toList()));
+            streamSet.addAll(list.stream().filter((n -> (n.getMeasurementId().equals(str)))).collect(Collectors.toList()));
         }
 
         return new ArrayList<>(streamSet);

@@ -38,18 +38,26 @@ public class MainTest {
 
     @Test
     public void test2GivenArguments() {
+        System.out.println("This test should take 1 minute to execute, so please stand by...");
         String argument =  "perf.int000";
 
         String[] arguments = new String[2];
         arguments[0] = this.filename;
         arguments[1] = argument;
-
+        long start = System.currentTimeMillis();
         try {
             Main.main(arguments);
             Assert.assertTrue(true);
         } catch (IllegalArgumentException x){
             Assert.fail();
         }
+        long end = System.currentTimeMillis();
+        // 6999 should be the highest cap according to test config
+        if ((end - start) > 69999 || (end - start) < 60000) {
+            Assert.fail();
+        }
+        System.out.println("You did it ;)");
+
     }
 
     @Test
